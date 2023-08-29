@@ -1,4 +1,9 @@
 {
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "env": {
     "browser": true,
     "es2021": true
@@ -19,7 +24,9 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "indent": ["off"],
+    "indent": [
+      "off"
+    ],
     "linebreak-style": [
       "error",
       "unix"

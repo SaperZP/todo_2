@@ -7,7 +7,6 @@ import { ReactComponent as ClockIcon } from '../../../../assets/icons/clock.svg'
 import { ReactComponent as TagIcon } from '../../../../assets/icons/label.svg';
 import { ReactComponent as FlagIcon } from '../../../../assets/icons/flag.svg';
 import { ReactComponent as SendIcon } from '../../../../assets/icons/send.svg';
-import { useDispatch } from 'react-redux';
 import { addTodo } from '../../../../store/todosReducer';
 import uuid from 'react-uuid';
 import CustomDialog from '../../../../components/CustomDialog/CustomDialog';

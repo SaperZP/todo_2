@@ -1,4 +1,4 @@
-import { Dialog, Fab, styled, TextField, Theme } from '@mui/material';
+import { Dialog, Fab, styled, TextField } from '@mui/material';
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiFormLabel-root': {

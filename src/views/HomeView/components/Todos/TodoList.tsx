@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { todosListStyles } from './styles';
 import { StyledTextField } from '../../../../components/styledComponents';
-import { InputAdornment, useTheme } from '@mui/material';
-import { ReactComponent } from '*.svg';
+import { InputAdornment } from '@mui/material';
 import { ReactComponent as MagCustomIcon } from '../../../../assets/icons/mag.svg';
 
 type TodosListProps = {
   todos: ToDo[];
 };
 
-const TodoList: React.FC<TodosListProps> = ({ todos }) => {
+const TodoList: React.FC<TodosListProps> = () => {
   const [searchString, setSearchString] = useState('');
   return (
     <Box sx={todosListStyles.wrapper}>
