@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import Box from '@mui/material/Box';
-import { Radio } from '@mui/material';
+import { ButtonBase, Radio } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { formatRelative } from 'date-fns';
 import { enGB } from 'date-fns/locale';
@@ -8,28 +8,19 @@ import categoriesList from '../../../../../utils/categoriesList';
 import { todoItemStyles } from '../styles';
 import { ReactComponent as FlagCustomIcon } from '../../../../../assets/icons/flag.svg';
 import CustomBadge from '../../../../../components/Badge/CustomBadge';
-import { useAppDispatch } from '../../../../../store/hooks';
-import { editTodo } from '../../../../../store/todosReducer';
+import { useNavigate } from 'react-router-dom';
+import StatusRadioButton from '../../../../../components/StatusRadioButton/StatusRadioButton';
 
 type todoItemProps = {
   todo: ToDo;
 };
 
 const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const date = todo.dueDate
     ? formatRelative(new Date(todo.dueDate), new Date(), { locale: enGB })
     : 'no date';
-
-  const isCompleteHandler = () => {
-    dispatch(
-      editTodo({
-        todoId: todo.id,
-        todoProp: { isDone: !todo.isDone },
-      })
-    );
-  };
 
   const Category = () => {
     const matchedCategory = categoriesList.find(
@@ -48,17 +39,17 @@ const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
     );
   };
 
+  const handleTodoClick = () => {
+    navigate(`task/${todo.id}`);
+  };
+
   return (
-    <Box sx={todoItemStyles.wrapper}>
+    <ButtonBase onClick={handleTodoClick} sx={todoItemStyles.wrapper}>
       <Box sx={todoItemStyles.radioButtonWrapper}>
-        <Radio
-          checked={todo.isDone}
-          onClick={isCompleteHandler}
-          sx={todoItemStyles.radioButton}
-        />
+        <StatusRadioButton todo={todo} />
       </Box>
       <Box sx={todoItemStyles.mainContentWrapper}>
-        <Typography>{todo.title}</Typography>
+        <Typography sx={todoItemStyles.title}>{todo.title}</Typography>
         <Box sx={todoItemStyles.mainContentBottom}>
           <Typography sx={todoItemStyles.dateText} variant={'subtitle2'}>
             {date}
@@ -74,7 +65,7 @@ const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
           </Box>
         </Box>
       </Box>
-    </Box>
+    </ButtonBase>
   );
 };
 

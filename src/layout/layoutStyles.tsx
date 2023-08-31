@@ -1,12 +1,6 @@
 import { SxProps, Theme } from '@mui/material';
 
 export const layoutStyles = {
-  container: {
-    display: 'flex',
-    height: '100vh',
-    flexDirection: 'column',
-    backgroundColor: (theme: Theme) => theme.palette.project_color_black.main,
-  } as SxProps,
   outletHolder: {
     display: 'flex',
     flexDirection: 'column',

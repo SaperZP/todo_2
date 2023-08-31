@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from '@mui/material/Container';
 import { AppBar } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +13,7 @@ import { ReactComponent as FocusActive } from '../assets/icons/focus-active.svg'
 import { ReactComponent as Profile } from '../assets/icons/profile.svg';
 import Box from '@mui/material/Box';
 import CustomButton from '../components/CustomButton';
-import { StyledFab } from '../components/styledComponents';
+import { StyledContainer, StyledFab } from '../components/styledComponents';
 import CustomDialogEvents from '../components/CustomDialog/CustomDialogEvents';
 import { Outlet } from 'react-router-dom';
 
@@ -25,7 +24,7 @@ const Layout = () => {
   console.log(currentView);
 
   return (
-    <Container disableGutters maxWidth={'sm'} sx={layoutStyles.container}>
+    <StyledContainer disableGutters maxWidth={'sm'}>
       <Box sx={layoutStyles.outletHolder}>
         <Outlet />
       </Box>
@@ -72,7 +71,7 @@ const Layout = () => {
           </Box>
         </Toolbar>
       </AppBar>
-    </Container>
+    </StyledContainer>
   );
 };
 

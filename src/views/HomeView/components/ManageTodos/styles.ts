@@ -56,16 +56,14 @@ export const todoItemStyles = {
     alignItems: 'center',
     justifyContent: 'center',
   } as SystemStyleObject,
-  radioButton: {
-    '&.MuiRadio-root': {
-      color: (theme: Theme) => theme.palette.project_color_white.main,
-    },
-  } as SystemStyleObject,
   mainContentWrapper: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
     gap: '6px',
+  } as SystemStyleObject,
+  title: {
+    textAlign: 'initial',
   } as SystemStyleObject,
   mainContentBottom: {
     display: 'flex',
@@ -83,5 +81,32 @@ export const todoItemStyles = {
   priority: {
     border: '1px solid',
     borderColor: (theme: Theme) => theme.palette.project_color_blue.main,
+  } as SystemStyleObject,
+};
+
+export const todoDetailsStyles = {
+  container: {
+    paddingTop: '10px',
+    gap: '34px',
+  } as SystemStyleObject,
+  header: {
+    color: (theme: Theme) => theme.palette.project_color_white.main,
+  } as SystemStyleObject,
+  closeButton: {
+    backgroundColor: (theme: Theme) => theme.palette.project_color_black.light,
+    borderRadius: '4px',
+  } as SystemStyleObject,
+  mainDetails: {
+    display: 'flex',
+    gap: '20px',
+  } as SystemStyleObject,
+  mainDetailsText: {
+    flexGrow: 1,
+  } as SystemStyleObject,
+  taskName: {
+    color: (theme: Theme) => theme.palette.project_color_white.main,
+  } as SystemStyleObject,
+  taskDescription: {
+    color: (theme: Theme) => theme.palette.project_color_gray.light,
   } as SystemStyleObject,
 };

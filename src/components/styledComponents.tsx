@@ -1,4 +1,5 @@
-import { Dialog, Fab, styled, TextField } from '@mui/material';
+import { Dialog, Fab, styled, TextField, Theme } from '@mui/material';
+import Container from '@mui/material/Container';
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiFormLabel-root': {
@@ -65,4 +66,11 @@ export const StyledFab = styled(Fab)(({ theme }) => ({
     width: '32px',
     height: '32px',
   },
+}));
+
+export const StyledContainer = styled(Container)(({ theme }) => ({
+  display: 'flex',
+  height: '100vh',
+  flexDirection: 'column',
+  backgroundColor: theme.palette.project_color_black.main,
 }));
