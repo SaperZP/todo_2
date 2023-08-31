@@ -8,10 +8,10 @@ import ModalPickersLayout from '../../../../../components/ModalPickersLayout/Mod
 
 type DateModalProps = {
   date: Date | null;
-  onChange: (value: Date | null) => void;
+  onChangeDate: (value: Date | null) => void;
 };
 
-const DateModal: React.FC<DateModalProps> = ({ date, onChange }) => {
+const DateModal: React.FC<DateModalProps> = ({ date, onChangeDate }) => {
   return (
     <CustomDialog persist id={'datePickerModal'}>
       <ModalPickersLayout
@@ -30,7 +30,7 @@ const DateModal: React.FC<DateModalProps> = ({ date, onChange }) => {
         <DateCalendar
           sx={addTodoStyles.dateCalendar}
           value={date}
-          onChange={(value) => onChange(value)}
+          onChange={(value) => onChangeDate(value)}
           showDaysOutsideCurrentMonth
           disableHighlightToday
           slots={{

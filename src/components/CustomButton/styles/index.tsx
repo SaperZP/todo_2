@@ -2,7 +2,7 @@ import { SystemStyleObject } from '@mui/system';
 
 export const customButtonStyles = {
   box: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
   } as SystemStyleObject,
   text: {

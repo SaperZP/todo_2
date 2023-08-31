@@ -10,10 +10,9 @@ const initialState: todosInitType = {
       id: '0d44a680-a8e9-eb27-180d-1a0cbd31bd04',
       title: 'todo a todo',
       description: 'from todo to todo',
-      dueDate:
-        'Tue Aug 29 2023 18:03:53 GMT+0300 (Eastern European Summer Time)',
+      dueDate: '2023-08-30T10:37:26.495Z',
       priority: 7,
-      label: 'university',
+      categoryID: 'university',
       isDone: false,
     },
   ],
@@ -28,7 +27,10 @@ const TodosSlice = createSlice({
     },
     editTodo: (
       state,
-      action: PayloadAction<{ todoId: string; todoProp: ToDo }>
+      action: PayloadAction<{
+        todoId: string;
+        todoProp: Partial<ToDo>;
+      }>
     ) => {
       state.todos = state.todos.map((todo) => {
         if (todo.id === action.payload.todoId) {
@@ -41,5 +43,5 @@ const TodosSlice = createSlice({
   },
 });
 
-export const { addTodo } = TodosSlice.actions;
+export const { addTodo, editTodo } = TodosSlice.actions;
 export default TodosSlice.reducer;

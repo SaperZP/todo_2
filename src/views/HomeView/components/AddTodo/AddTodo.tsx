@@ -16,6 +16,7 @@ import TimeModal from './components/TimeModal';
 import TaskPriorityModal from './components/TaskPriorityModal';
 import TaskCategoryModal from './components/TaskCategoryModal';
 import { useAppDispatch } from '../../../../store/hooks';
+import { dateToISO } from '../../../../utils/dateUtils';
 
 const AddTodo = () => {
   const [taskName, setTaskName] = useState('');
@@ -36,9 +37,9 @@ const AddTodo = () => {
         id,
         title: taskName,
         description: taskDescription,
-        dueDate: taskDate ? taskDate.toString() : null,
+        dueDate: dateToISO(taskDate),
         priority: taskPriority ? Number(taskPriority) : null,
-        label: taskLabel ? taskLabel : null,
+        categoryID: taskLabel ? taskLabel : null,
         isDone: false,
       })
     );
@@ -46,6 +47,8 @@ const AddTodo = () => {
     setTaskName('');
     setTaskDescription('');
     setTaskDate(new Date());
+    setTaskPriority('');
+    setTaskLabel('');
   };
 
   return (
@@ -102,7 +105,7 @@ const AddTodo = () => {
         </FormControl>
       </form>
 
-      <DateModal date={taskDate} onChange={setTaskDate} />
+      <DateModal date={taskDate} onChangeDate={setTaskDate} />
       <TimeModal date={taskDate} onSave={setTaskDate} />
       <TaskPriorityModal value={taskPriority} onSave={setTaskPriority} />
       <TaskCategoryModal value={taskLabel} onSave={setTaskLabel} />

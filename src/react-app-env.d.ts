@@ -6,10 +6,6 @@ type ToDo = {
   description: string | null;
   dueDate: string | null;
   priority: number | null;
-  label: string | null;
+  categoryID: string | null;
   isDone: boolean;
-};
-
-type ToDoPartial<K extends keyof ToDo> = {
-  [P in K]: ToDo[P];
 };

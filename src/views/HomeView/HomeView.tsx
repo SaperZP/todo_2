@@ -4,12 +4,10 @@ import Header from './components/Header';
 import NoTodos from './components/NoTodos';
 import { useAppSelector } from '../../store/hooks';
 import AddTodo from './components/AddTodo';
-import TodoList from './components/Todos';
+import ManageTodos from './components/ManageTodos';
 
 const HomeView = () => {
   const { todos } = useAppSelector((state) => state.todosData);
-
-  console.log('HomeView');
 
   // const [todos, setTodos] = useState<ToDo[]>(() => {
   //   const savedToDos: string | null = localStorage.getItem('todos');
@@ -21,7 +19,7 @@ const HomeView = () => {
     <>
       <Header />
       <Box component={'main'} style={{ flex: '1 1 auto' }}>
-        {todos.length > 0 ? <TodoList todos={todos} /> : <NoTodos />}
+        {todos.length > 0 ? <ManageTodos todos={todos} /> : <NoTodos />}
         <AddTodo />
       </Box>
     </>
