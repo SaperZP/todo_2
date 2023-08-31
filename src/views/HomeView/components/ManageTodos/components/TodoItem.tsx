@@ -1,6 +1,6 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import { ButtonBase, Radio } from '@mui/material';
+import { ButtonBase } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { formatRelative } from 'date-fns';
 import { enGB } from 'date-fns/locale';
