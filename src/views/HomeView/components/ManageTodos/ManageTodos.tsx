@@ -55,7 +55,6 @@ const ManageTodos: React.FC<TodosListProps> = () => {
   return (
     <Box sx={manageTodosStyles.wrapper}>
       <StyledTextField
-        className={'here'}
         sx={manageTodosStyles.textField}
         fullWidth
         onChange={changeHandler}

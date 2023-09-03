@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
 import Box from '@mui/material/Box';
 import { MultiSectionDigitalClock } from '@mui/x-date-pickers';
-import { addTodoStyles } from '../styles';
+import { timeModalStyles } from '../styles';
 import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
 import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
 
 type TimeModalProps = {
   date: Date | null;
-  onSave: (value: Date | null) => void;
+  onChangeTime: (value: Date | null) => void;
 };
 
-const TimeModal: React.FC<TimeModalProps> = ({ date, onSave }) => {
-  const [time, setTime] = useState<Date | null>(date);
-
+const TimeModal: React.FC<TimeModalProps> = ({ date, onChangeTime }) => {
   const saveHandler = () => {
     CustomDialogEvents.emit('timePickerModal', false);
-    onSave(time);
+  };
+
+  const cancelHandler = () => {
+    CustomDialogEvents.emit('timePickerModal', false);
   };
 
   return (
     <CustomDialog persist id={'timePickerModal'}>
       <ModalPickersLayout
         leftButton={{
-          callback: () => CustomDialogEvents.emit('timePickerModal', false),
+          callback: cancelHandler,
           text: 'Cancel',
         }}
         rightButton={{
@@ -32,12 +33,12 @@ const TimeModal: React.FC<TimeModalProps> = ({ date, onSave }) => {
         }}
         title={'Choose time'}
       >
-        <Box sx={addTodoStyles.multiSectionWrapper}>
+        <Box sx={timeModalStyles.multiSectionWrapper}>
           <MultiSectionDigitalClock
-            sx={addTodoStyles.multiSection}
+            sx={timeModalStyles.multiSection}
             timeSteps={{ minutes: 1 }}
-            value={time}
-            onChange={setTime}
+            value={date}
+            onChange={onChangeTime}
             autoFocus={true}
           />
         </Box>
@@ -46,4 +47,4 @@ const TimeModal: React.FC<TimeModalProps> = ({ date, onSave }) => {
   );
 };
 
-export default TimeModal;
+export default React.memo(TimeModal);

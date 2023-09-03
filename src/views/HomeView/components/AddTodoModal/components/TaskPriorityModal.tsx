@@ -1,34 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
 import Box from '@mui/material/Box';
 import { ReactComponent as CustomFlagIcon } from '../../../../../assets/icons/flag.svg';
 import CustomButton from '../../../../../components/CustomButton';
 import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
-import { addTodoStyles } from '../styles';
+import { taskPriorityModalStyles } from '../styles';
 import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
 import { useTheme } from '@mui/material';
 
 type TaskPriorityModalProps = {
-  value: string;
-  onSave: (value: string) => void;
+  taskPriority: number | null;
+  onSetTask: (value: number | null) => void;
 };
 
 const TaskPriorityModal: React.FC<TaskPriorityModalProps> = ({
-  value,
-  onSave,
+  taskPriority,
+  onSetTask,
 }) => {
   const theme = useTheme();
   const priorityRange = Array.from({ length: 10 }, (_, i) => i + 1);
-  const [selectedPriority, setSelectedPriority] = useState(value);
 
-  const changePriorityHandler = () => {
+  const onSaveHandler = () => {
     CustomDialogEvents.emit('taskPriorityModal', false);
-    onSave(selectedPriority);
   };
 
   const cancelHandler = () => {
-    setSelectedPriority('');
-    onSave('');
+    onSetTask(null);
     CustomDialogEvents.emit('taskPriorityModal', false);
   };
 
@@ -40,24 +37,24 @@ const TaskPriorityModal: React.FC<TaskPriorityModalProps> = ({
           text: 'Cancel',
         }}
         rightButton={{
-          callback: changePriorityHandler,
+          callback: onSaveHandler,
           text: 'Save',
         }}
         title={'Task Priority'}
       >
-        <Box sx={addTodoStyles.taskPriorityWrapper}>
+        <Box sx={taskPriorityModalStyles.wrapper}>
           {priorityRange.map((item, index) => {
             const isSelected =
-              item.toString() === selectedPriority
+              item === taskPriority
                 ? { backgroundColor: theme.palette.project_color_blue.main }
                 : {};
 
             return (
               <CustomButton
                 key={index}
-                onClick={() => setSelectedPriority(item.toString())}
+                onClick={() => onSetTask(item)}
                 containerSx={{
-                  ...addTodoStyles.taskPriorityRangeItem,
+                  ...taskPriorityModalStyles.rangeItem,
                   ...isSelected,
                 }}
                 muiButtonProps={{ disableRipple: true }}
@@ -73,4 +70,4 @@ const TaskPriorityModal: React.FC<TaskPriorityModalProps> = ({
   );
 };
 
-export default TaskPriorityModal;
+export default React.memo(TaskPriorityModal);

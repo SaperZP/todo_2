@@ -1,18 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Button, Divider } from '@mui/material';
+import { Divider } from '@mui/material';
 import { modalPickersLayoutStyles } from './styles';
-
-type buttonProps = {
-  text: string;
-  callback: () => void;
-};
+import ModalButtons from '../ModalButtons';
 
 type modalPickersLayoutProps = {
   title?: string;
-  leftButton: buttonProps;
-  rightButton: buttonProps;
+  leftButton?: modalButtonType;
+  rightButton?: modalButtonType;
   children: React.ReactElement | React.ReactElement[];
 };
 
@@ -39,25 +35,9 @@ const ModalPickersLayout: React.FC<modalPickersLayoutProps> = ({
 
       {children}
 
-      <Box sx={modalPickersLayoutStyles.modalButtons}>
-        <Button
-          onClick={leftButton.callback}
-          sx={modalPickersLayoutStyles.modalButton}
-          fullWidth
-          variant="text"
-        >
-          {leftButton.text}
-        </Button>
-
-        <Button
-          onClick={rightButton.callback}
-          sx={modalPickersLayoutStyles.modalButton}
-          fullWidth
-          variant="contained"
-        >
-          {rightButton.text}
-        </Button>
-      </Box>
+      {leftButton && rightButton && (
+        <ModalButtons leftButton={leftButton} rightButton={rightButton} />
+      )}
     </Box>
   );
 };

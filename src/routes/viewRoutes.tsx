@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView';
 import CalendarView from '../views/CalendarView';
 import React from 'react';
 import ErrorPage from './ErrorPage';
-import TodoDetails from '../views/HomeView/components/ManageTodos/components/TodoDetails';
+import TodoDetailsView from '../views/TodoDetailsView/TodoDetailsView';
 
 const viewRouter = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const viewRouter = createBrowserRouter([
     ],
   },
   {
-    element: <TodoDetails />,
+    element: <TodoDetailsView />,
     path: '/task/:taskId',
   },
 ]);

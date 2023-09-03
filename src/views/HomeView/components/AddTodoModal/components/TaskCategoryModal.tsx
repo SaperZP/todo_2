@@ -1,33 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
 import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
 import Box from '@mui/material/Box';
 import CustomButton from '../../../../../components/CustomButton';
 import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
-import { addTodoStyles } from '../styles';
+import { taskCategoryModal } from '../styles';
 import { useTheme } from '@mui/material';
 import categoriesList from '../../../../../utils/categoriesList';
 
 type TaskCategoryModalProps = {
-  value: string;
-  onSave: (value: string) => void;
+  taskCategory: string;
+  onSetPriority: (value: string) => void;
 };
 
 const TaskCategoryModal: React.FC<TaskCategoryModalProps> = ({
-  value,
-  onSave,
+  taskCategory,
+  onSetPriority,
 }) => {
   const theme = useTheme();
-  const [selectedCategory, setSelectedCategory] = useState(value);
 
   const saveHandler = () => {
     CustomDialogEvents.emit('TaskCategoryModal', false);
-    onSave(selectedCategory);
   };
 
   const cancelHandler = () => {
-    setSelectedCategory('');
-    onSave('');
+    onSetPriority('');
     CustomDialogEvents.emit('TaskCategoryModal', false);
   };
 
@@ -38,10 +35,10 @@ const TaskCategoryModal: React.FC<TaskCategoryModalProps> = ({
         rightButton={{ callback: saveHandler, text: 'Save' }}
         title={'Choose category'}
       >
-        <Box sx={addTodoStyles.taskCategoryWrapper}>
+        <Box sx={taskCategoryModal.wrapper}>
           {categoriesList.map((category) => {
             const isSelected =
-              selectedCategory === category.id
+              taskCategory === category.id
                 ? {
                     backgroundColor: 'initial',
                     border: '1px solid',
@@ -52,17 +49,17 @@ const TaskCategoryModal: React.FC<TaskCategoryModalProps> = ({
             return (
               <CustomButton
                 key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
+                onClick={() => onSetPriority(category.id)}
                 text={category.name}
                 textPosition={'bottom'}
                 icon={category.icon}
                 iconSize={32}
                 iconColor={category.backgroundColor}
-                textSx={addTodoStyles.taskCategoryItemText}
+                textSx={taskCategoryModal.itemText}
                 muiButtonProps={{
                   disableRipple: true,
                   sx: {
-                    ...addTodoStyles.taskCategoryItemButton,
+                    ...taskCategoryModal.itemButton,
                     ...isSelected,
                   },
                 }}
@@ -75,4 +72,4 @@ const TaskCategoryModal: React.FC<TaskCategoryModalProps> = ({
   );
 };
 
-export default TaskCategoryModal;
+export default React.memo(TaskCategoryModal);

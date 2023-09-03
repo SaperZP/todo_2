@@ -1,13 +1,12 @@
 import { Theme } from '@mui/material';
 import { SystemStyleObject } from '@mui/system';
 
-export const addTodoStyles = {
+export const addTodoModalStyles = {
   formControl: {
     display: 'flex',
     flexDirection: 'column',
     gap: '14px',
     color: (theme: Theme) => theme.palette.project_color_white.main,
-    height: '33vh',
     padding: '24px 24px 17px 24px',
   } as SystemStyleObject,
   legend: {
@@ -18,6 +17,9 @@ export const addTodoStyles = {
   buttonGroup: {
     gap: '14px',
   } as SystemStyleObject,
+};
+
+export const dateModalStyles = {
   dateCalendar: {
     margin: '0',
     width: 'auto',
@@ -25,6 +27,9 @@ export const addTodoStyles = {
       minHeight: '192px',
     },
   } as SystemStyleObject,
+};
+
+export const timeModalStyles = {
   multiSectionWrapper: {
     height: '96px',
     overflow: 'hidden',
@@ -34,14 +39,17 @@ export const addTodoStyles = {
     width: 'auto',
     borderBottom: 'unset',
   } as SystemStyleObject,
-  taskPriorityWrapper: {
+};
+
+export const taskPriorityModalStyles = {
+  wrapper: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '16px',
     width: '304px',
     alignSelf: 'center',
   } as SystemStyleObject,
-  taskPriorityRangeItem: {
+  rangeItem: {
     cursor: 'pointer',
     width: '64px',
     height: '64px',
@@ -52,7 +60,10 @@ export const addTodoStyles = {
       backgroundColor: (theme: Theme) => theme.palette.project_color_blue.main,
     },
   } as SystemStyleObject,
-  taskCategoryWrapper: {
+};
+
+export const taskCategoryModal = {
+  wrapper: {
     display: 'grid',
     flexWrap: 'wrap',
     gridTemplateColumns: 'repeat(auto-fill, 64px)',
@@ -60,11 +71,11 @@ export const addTodoStyles = {
     columnGap: '49px',
     rowGap: '16px',
   } as SystemStyleObject,
-  taskCategoryItemText: {
+  itemText: {
     fontSize: '14px',
     color: 'white',
   } as SystemStyleObject,
-  taskCategoryItemButton: {
+  itemButton: {
     border: '1px solid transparent',
     borderRadius: '4px',
     padding: '16px',

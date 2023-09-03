@@ -21,8 +21,6 @@ const Layout = () => {
   const navigate = useNavigate();
   const currentView = useLocation().pathname;
 
-  console.log(currentView);
-
   return (
     <StyledContainer disableGutters maxWidth={'sm'}>
       <Box sx={layoutStyles.outletHolder}>

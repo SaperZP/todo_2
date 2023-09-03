@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { ButtonGroup, FormControl, FormLabel } from '@mui/material';
-import { addTodoStyles } from './styles';
+import { addTodoModalStyles } from './styles';
 import { StyledTextField } from '../../../../components/styledComponents';
 import CustomButton from '../../../../components/CustomButton';
 import { ReactComponent as ClockIcon } from '../../../../assets/icons/clock.svg';
@@ -18,12 +18,12 @@ import TaskCategoryModal from './components/TaskCategoryModal';
 import { useAppDispatch } from '../../../../store/hooks';
 import { dateToISO } from '../../../../utils/dateUtils';
 
-const AddTodo = () => {
+const AddTodoModal = () => {
   const [taskName, setTaskName] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const [taskDate, setTaskDate] = useState<Date | null>(new Date());
-  const [taskPriority, setTaskPriority] = useState('');
-  const [taskLabel, setTaskLabel] = useState('');
+  const [taskPriority, setTaskPriority] = useState<number | null>(null);
+  const [taskCategory, setTaskCategory] = useState('');
   const dispatch = useAppDispatch();
 
   const addTodoHandler = (event: FormEvent) => {
@@ -39,7 +39,7 @@ const AddTodo = () => {
         description: taskDescription,
         dueDate: dateToISO(taskDate),
         priority: taskPriority ? Number(taskPriority) : null,
-        categoryID: taskLabel ? taskLabel : null,
+        categoryID: taskCategory ? taskCategory : null,
         isDone: false,
       })
     );
@@ -47,15 +47,15 @@ const AddTodo = () => {
     setTaskName('');
     setTaskDescription('');
     setTaskDate(new Date());
-    setTaskPriority('');
-    setTaskLabel('');
+    setTaskPriority(null);
+    setTaskCategory('');
   };
 
   return (
     <CustomDialog id={'addTodoModal'}>
       <form onSubmit={addTodoHandler}>
-        <FormControl sx={addTodoStyles.formControl}>
-          <FormLabel sx={addTodoStyles.legend} component={'legend'}>
+        <FormControl sx={addTodoModalStyles.formControl}>
+          <FormLabel sx={addTodoModalStyles.legend} component={'legend'}>
             Add Task
           </FormLabel>
 
@@ -79,7 +79,7 @@ const AddTodo = () => {
             placeholder={'Do chapter 2 to 5 for next week'}
           />
 
-          <ButtonGroup sx={addTodoStyles.buttonGroup}>
+          <ButtonGroup sx={addTodoModalStyles.buttonGroup}>
             <CustomButton
               icon={ClockIcon}
               onClick={() => CustomDialogEvents.emit('datePickerModal', true)}
@@ -99,18 +99,23 @@ const AddTodo = () => {
                 justifyContent: 'end',
                 flexGrow: 1,
               }}
-              // onClick={addTodoHandler}
             />
           </ButtonGroup>
         </FormControl>
       </form>
 
       <DateModal date={taskDate} onChangeDate={setTaskDate} />
-      <TimeModal date={taskDate} onSave={setTaskDate} />
-      <TaskPriorityModal value={taskPriority} onSave={setTaskPriority} />
-      <TaskCategoryModal value={taskLabel} onSave={setTaskLabel} />
+      <TimeModal date={taskDate} onChangeTime={setTaskDate} />
+      <TaskPriorityModal
+        taskPriority={taskPriority}
+        onSetTask={setTaskPriority}
+      />
+      <TaskCategoryModal
+        taskCategory={taskCategory}
+        onSetPriority={setTaskCategory}
+      />
     </CustomDialog>
   );
 };
 
-export default AddTodo;
+export default AddTodoModal;

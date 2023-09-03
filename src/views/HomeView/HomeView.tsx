@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Header from './components/Header';
 import NoTodos from './components/NoTodos';
 import { useAppSelector } from '../../store/hooks';
-import AddTodo from './components/AddTodo';
+import AddTodoModal from './components/AddTodoModal';
 import ManageTodos from './components/ManageTodos';
 
 const HomeView = () => {
@@ -20,7 +20,7 @@ const HomeView = () => {
       <Header />
       <Box component={'main'} style={{ flex: '1 1 auto' }}>
         {todos.length > 0 ? <ManageTodos todos={todos} /> : <NoTodos />}
-        <AddTodo />
+        <AddTodoModal />
       </Box>
     </>
   );

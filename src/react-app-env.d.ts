@@ -9,3 +9,9 @@ type ToDo = {
   categoryID: string | null;
   isDone: boolean;
 };
+
+type modalButtonType = {
+  text: string;
+  callback: () => void;
+  isSubmit?: boolean;
+};

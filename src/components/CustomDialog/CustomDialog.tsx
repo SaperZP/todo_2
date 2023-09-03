@@ -36,10 +36,11 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
 
   return (
     <StyledDialog
+      disableRestoreFocus
       open={modalOpen}
       onClose={() => !persist && CustomDialogEvents.emit(id, false)}
     >
-      {children}
+      {modalOpen && children}
     </StyledDialog>
   );
 };
