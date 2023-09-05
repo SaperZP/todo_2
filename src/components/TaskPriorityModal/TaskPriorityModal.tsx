@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
-import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
+import CustomDialog from '../CustomDialog/CustomDialog';
 import Box from '@mui/material/Box';
-import { ReactComponent as CustomFlagIcon } from '../../../../../assets/icons/flag.svg';
-import CustomButton from '../../../../../components/CustomButton';
-import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
-import { taskPriorityModalStyles } from '../styles';
-import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
+import { ReactComponent as CustomFlagIcon } from '../../assets/icons/flag.svg';
+import CustomButton from '../CustomButton';
+import ModalPickersLayout from '../ModalPickersLayout/ModalPickersLayout';
+import { taskPriorityModalStyles } from './styles';
+import CustomDialogEvents from '../CustomDialog/CustomDialogEvents';
 import { useTheme } from '@mui/material';
 
 type TaskPriorityModalProps = {

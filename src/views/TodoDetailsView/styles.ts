@@ -43,3 +43,10 @@ export const editTodoSection = getSxStyles({
     backgroundColor: (theme) => theme.palette.project_color_gray.main,
   },
 });
+
+export const deleteTodoModal = getSxStyles({
+  text: {
+    color: (theme) => theme.palette.project_color_white.main,
+    textAlign: 'center',
+  },
+});

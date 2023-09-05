@@ -9,7 +9,7 @@ import { SystemStyleObject } from '@mui/system';
 interface CustomButtonProps {
   onClick?: () => void;
   containerSx?: SystemStyleObject<Theme>;
-  textSx?: SystemStyleObject;
+  textSx?: SystemStyleObject<Theme>;
   icon?: React.FC;
   iconSize?: number;
   iconColor?: string;

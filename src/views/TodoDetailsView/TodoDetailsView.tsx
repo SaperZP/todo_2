@@ -19,9 +19,10 @@ import { ReactComponent as FlagCustomIcon } from '../../assets/icons/flag.svg';
 import { ReactComponent as TrashCustomIcon } from '../../assets/icons/trash.svg';
 import categoriesList from '../../utils/categoriesList';
 import { getReadableDate } from '../../utils/dateUtils';
-import DateModal from '../HomeView/components/AddTodoModal/components/DateModal';
-import TaskCategoryModal from '../HomeView/components/AddTodoModal/components/TaskCategoryModal';
-import TaskPriorityModal from '../HomeView/components/AddTodoModal/components/TaskPriorityModal';
+import DateModal from '../../components/DateModal';
+import TaskCategoryModal from '../../components/TaskCategoryModal';
+import TaskPriorityModal from '../../components/TaskPriorityModal';
+import DeleteTodoModal from './components/DeleteTodoModal';
 
 const TodoDetailsView = () => {
   const { taskId } = useParams();
@@ -127,7 +128,7 @@ const TodoDetailsView = () => {
             icon={TrashCustomIcon}
             textPosition={'right'}
             textSx={{ color: 'red' }}
-            onClick={deleteToDo}
+            onClick={() => CustomDialogEvents.emit('deleteTodoModal', true)}
             text={'Delete Task'}
           />
 
@@ -153,6 +154,7 @@ const TodoDetailsView = () => {
             onSetPriority={prepareToEdit}
             updateTodo={updateTodo}
           />
+          <DeleteTodoModal onDelete={deleteToDo} />
         </>
       ) : (
         'error - no todo'

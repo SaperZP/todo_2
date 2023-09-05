@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { ButtonGroup, FormControl, FormLabel } from '@mui/material';
 import { addTodoModalStyles } from './styles';
 import { StyledTextField } from '../../../../components/styledComponents';
@@ -11,9 +11,9 @@ import { addTodo } from '../../../../store/todosReducer';
 import uuid from 'react-uuid';
 import CustomDialog from '../../../../components/CustomDialog/CustomDialog';
 import CustomDialogEvents from '../../../../components/CustomDialog/CustomDialogEvents';
-import DateModal from './components/DateModal';
-import TaskPriorityModal from './components/TaskPriorityModal';
-import TaskCategoryModal from './components/TaskCategoryModal';
+import DateModal from '../../../../components/DateModal';
+import TaskPriorityModal from '../../../../components/TaskPriorityModal';
+import TaskCategoryModal from '../../../../components/TaskCategoryModal';
 import { useAppDispatch } from '../../../../store/hooks';
 import { dateToISO } from '../../../../utils/dateUtils';
 

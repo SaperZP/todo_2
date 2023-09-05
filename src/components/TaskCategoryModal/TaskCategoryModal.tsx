@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
-import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
+import CustomDialog from '../CustomDialog/CustomDialog';
+import ModalPickersLayout from '../ModalPickersLayout/ModalPickersLayout';
 import Box from '@mui/material/Box';
-import CustomButton from '../../../../../components/CustomButton';
-import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
-import { taskCategoryModal } from '../styles';
+import CustomButton from '../CustomButton';
+import CustomDialogEvents from '../CustomDialog/CustomDialogEvents';
+import { taskCategoryModal } from './styles';
 import { useTheme } from '@mui/material';
-import categoriesList from '../../../../../utils/categoriesList';
+import categoriesList from '../../utils/categoriesList';
 
 type TaskCategoryModalProps = {
   taskCategoryId: string | null;

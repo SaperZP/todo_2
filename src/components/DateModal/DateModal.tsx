@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
-import { dateModalStyles, timeModalStyles } from '../styles';
+import CustomDialog from '../CustomDialog/CustomDialog';
+import { dateModalStyles, timeModalStyles } from './styles';
 import { DateCalendar, MultiSectionDigitalClock } from '@mui/x-date-pickers';
-import CustomPickersCalendarHeader from '../../../../../components/CustomPickersCalendarHeader';
-import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
-import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
-import { dateToISO } from '../../../../../utils/dateUtils';
+import CustomPickersCalendarHeader from '../CustomPickersCalendarHeader';
+import CustomDialogEvents from '../CustomDialog/CustomDialogEvents';
+import ModalPickersLayout from '../ModalPickersLayout/ModalPickersLayout';
+import { dateToISO } from '../../utils/dateUtils';
 import Box from '@mui/material/Box';
 
 type DateModalProps = {
