@@ -1,29 +1,45 @@
-import { SystemStyleObject } from '@mui/system';
-import { Theme } from '@mui/material';
+import { getSxStyles } from '../../utils/getSxStyles';
 
-export const todoDetailsStyles = {
+export const todoDetailsStyles = getSxStyles({
   container: {
     paddingTop: '10px',
     gap: '34px',
-  } as SystemStyleObject,
+  },
   header: {
-    color: (theme: Theme) => theme.palette.project_color_white.main,
-  } as SystemStyleObject,
+    color: (theme) => theme.palette.project_color_white.main,
+  },
   closeButton: {
-    backgroundColor: (theme: Theme) => theme.palette.project_color_black.light,
+    backgroundColor: (theme) => theme.palette.project_color_black.light,
     borderRadius: '4px',
-  } as SystemStyleObject,
+  },
   mainDetails: {
     display: 'flex',
     gap: '20px',
-  } as SystemStyleObject,
+  },
   mainDetailsText: {
     flexGrow: 1,
-  } as SystemStyleObject,
+  },
   taskName: {
-    color: (theme: Theme) => theme.palette.project_color_white.main,
-  } as SystemStyleObject,
+    color: (theme) => theme.palette.project_color_white.main,
+  },
   taskDescription: {
-    color: (theme: Theme) => theme.palette.project_color_gray.light,
-  } as SystemStyleObject,
-};
+    color: (theme) => theme.palette.project_color_gray.light,
+  },
+});
+
+export const editTodoSection = getSxStyles({
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    color: (theme) => theme.palette.project_color_white.main,
+  },
+  section: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  editSectionButton: {
+    textTransform: 'capitalize',
+    backgroundColor: (theme) => theme.palette.project_color_gray.main,
+  },
+});

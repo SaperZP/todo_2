@@ -10,24 +10,30 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { ReactComponent as EditCustomIcon } from '../../assets/icons/edit.svg';
 import EditTodoModal from './components/EditTodoModal';
-import { editTodo } from '../../store/todosReducer';
+import { editTodo, deleteTodo } from '../../store/todosReducer';
 import CustomDialogEvents from '../../components/CustomDialog/CustomDialogEvents';
 import EditTodoSection from './components/EditTodoSection';
 import { ReactComponent as ClockCustomIcon } from '../../assets/icons/clock.svg';
 import { ReactComponent as TagCustomIcon } from '../../assets/icons/label.svg';
 import { ReactComponent as FlagCustomIcon } from '../../assets/icons/flag.svg';
+import { ReactComponent as TrashCustomIcon } from '../../assets/icons/trash.svg';
 import categoriesList from '../../utils/categoriesList';
+import { getReadableDate } from '../../utils/dateUtils';
+import DateModal from '../HomeView/components/AddTodoModal/components/DateModal';
+import TaskCategoryModal from '../HomeView/components/AddTodoModal/components/TaskCategoryModal';
+import TaskPriorityModal from '../HomeView/components/AddTodoModal/components/TaskPriorityModal';
 
 const TodoDetailsView = () => {
-  const navigate = useNavigate();
   const { taskId } = useParams();
-  const { todos } = useAppSelector((state) => state.todosData);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const { todos } = useAppSelector((state) => state.todosData);
   const [toEdit, setToEdit] = useState(() =>
     todos.find((todo) => todo.id === taskId)
   );
   const category = categoriesList.find(
-    (category) => category.id === toEdit?.categoryID
+    (category) => category.id === toEdit?.categoryId
   );
 
   const handleClose = () => {
@@ -40,15 +46,20 @@ const TodoDetailsView = () => {
     );
   };
 
-  const updateTodo = (todoProp: Partial<ToDo>) => {
-    if (typeof taskId === 'string') {
-      dispatch(
-        editTodo({
-          todoId: taskId,
-          todoProp,
-        })
-      );
-    } else alert('something went wrong - no todoId');
+  const updateTodo = (todoPart: Partial<ToDo>) =>
+    taskId &&
+    dispatch(
+      editTodo({
+        todoId: taskId,
+        todoProp: todoPart,
+      })
+    );
+
+  const deleteToDo = () => {
+    if (taskId) {
+      dispatch(deleteTodo({ todoId: taskId }));
+      navigate('/');
+    }
   };
 
   const handleOpenEditTodo = () => {
@@ -88,21 +99,36 @@ const TodoDetailsView = () => {
               />
             </Box>
           </Box>
+
           <EditTodoSection
+            onClick={() => CustomDialogEvents.emit('datePickerModal', true)}
             icon={ClockCustomIcon}
             sectionName={'Task Time:'}
-            value={toEdit.dueDate ? toEdit.dueDate : 'No date'}
+            value={getReadableDate(toEdit.dueDate)}
           />
+
           <EditTodoSection
+            onClick={() => CustomDialogEvents.emit('taskCategoryModal', true)}
             icon={TagCustomIcon}
             sectionName={'Task Category:'}
             value={category?.name}
             valueIcon={category?.icon}
           />
+
           <EditTodoSection
+            onClick={() => CustomDialogEvents.emit('taskPriorityModal', true)}
             icon={FlagCustomIcon}
             sectionName={'Task Priority:'}
             value={toEdit.priority ? toEdit.priority.toString() : 'No priority'}
+          />
+
+          <CustomButton
+            muiButtonProps={{ sx: { padding: '0 8px 0 0' } }}
+            icon={TrashCustomIcon}
+            textPosition={'right'}
+            textSx={{ color: 'red' }}
+            onClick={deleteToDo}
+            text={'Delete Task'}
           />
 
           <EditTodoModal
@@ -110,6 +136,22 @@ const TodoDetailsView = () => {
             taskDescription={toEdit.description}
             prepareToEdit={prepareToEdit}
             updateTodoHandler={updateTodo}
+          />
+
+          <DateModal
+            date={toEdit.dueDate}
+            onSetDate={prepareToEdit}
+            updateTodo={updateTodo}
+          />
+          <TaskCategoryModal
+            taskCategoryId={toEdit.categoryId}
+            onSetCategory={prepareToEdit}
+            updateTodo={updateTodo}
+          />
+          <TaskPriorityModal
+            taskPriority={toEdit.priority}
+            onSetPriority={prepareToEdit}
+            updateTodo={updateTodo}
           />
         </>
       ) : (

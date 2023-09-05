@@ -17,9 +17,14 @@ const PROJECT_COLOR_WHITE = {
   main: '#FFFFFFDE',
 };
 
+const PROJECT_COLOR_RED = {
+  main: '#FF4949',
+};
+
 export const PALETTE_COLORS = {
   project_color_blue: PROJECT_COLOR_BLUE,
   project_color_black: PROJECT_COLOR_BLACK,
   project_color_gray: PROJECT_COLOR_GRAY,
   project_color_white: PROJECT_COLOR_WHITE,
+  project_color_red: PROJECT_COLOR_RED,
 };

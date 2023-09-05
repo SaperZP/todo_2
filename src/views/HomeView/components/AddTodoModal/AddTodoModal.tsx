@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { ButtonGroup, FormControl, FormLabel } from '@mui/material';
 import { addTodoModalStyles } from './styles';
 import { StyledTextField } from '../../../../components/styledComponents';
@@ -12,19 +12,41 @@ import uuid from 'react-uuid';
 import CustomDialog from '../../../../components/CustomDialog/CustomDialog';
 import CustomDialogEvents from '../../../../components/CustomDialog/CustomDialogEvents';
 import DateModal from './components/DateModal';
-import TimeModal from './components/TimeModal';
 import TaskPriorityModal from './components/TaskPriorityModal';
 import TaskCategoryModal from './components/TaskCategoryModal';
 import { useAppDispatch } from '../../../../store/hooks';
 import { dateToISO } from '../../../../utils/dateUtils';
 
+const emptyTodo = {
+  id: '',
+  title: '',
+  description: '',
+  dueDate: dateToISO(new Date()),
+  priority: null,
+  categoryId: null,
+  isDone: false,
+};
+
 const AddTodoModal = () => {
-  const [taskName, setTaskName] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
-  const [taskDate, setTaskDate] = useState<Date | null>(new Date());
-  const [taskPriority, setTaskPriority] = useState<number | null>(null);
-  const [taskCategory, setTaskCategory] = useState('');
+  const [newTodo, setNewTodo] = useState<ToDo>(emptyTodo);
+
   const dispatch = useAppDispatch();
+
+  const changeTextHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    todoKey: keyof ToDo
+  ) => {
+    setNewTodo((prevState) => ({
+      ...prevState,
+      [todoKey]: event.target.value,
+    }));
+  };
+
+  const onChangeTaskDetails = (toEditPart: Partial<ToDo>) => {
+    setNewTodo((prevState) => {
+      return { ...prevState, ...toEditPart };
+    });
+  };
 
   const addTodoHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -34,21 +56,11 @@ const AddTodoModal = () => {
 
     dispatch(
       addTodo({
+        ...newTodo,
         id,
-        title: taskName,
-        description: taskDescription,
-        dueDate: dateToISO(taskDate),
-        priority: taskPriority ? Number(taskPriority) : null,
-        categoryID: taskCategory ? taskCategory : null,
-        isDone: false,
       })
     );
-
-    setTaskName('');
-    setTaskDescription('');
-    setTaskDate(new Date());
-    setTaskPriority(null);
-    setTaskCategory('');
+    setNewTodo(emptyTodo);
   };
 
   return (
@@ -62,8 +74,8 @@ const AddTodoModal = () => {
           <StyledTextField
             required
             autoComplete={'off'}
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
+            value={newTodo.title}
+            onChange={(event) => changeTextHandler(event, 'title')}
             autoFocus
             label={'Task name'}
             id={'taskName'}
@@ -72,8 +84,8 @@ const AddTodoModal = () => {
 
           <StyledTextField
             autoComplete={'off'}
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
+            value={newTodo.description}
+            onChange={(event) => changeTextHandler(event, 'description')}
             label={'Task description'}
             id={'taskDescription'}
             placeholder={'Do chapter 2 to 5 for next week'}
@@ -86,7 +98,7 @@ const AddTodoModal = () => {
             />
             <CustomButton
               icon={TagIcon}
-              onClick={() => CustomDialogEvents.emit('TaskCategoryModal', true)}
+              onClick={() => CustomDialogEvents.emit('taskCategoryModal', true)}
             />
             <CustomButton
               icon={FlagIcon}
@@ -104,15 +116,14 @@ const AddTodoModal = () => {
         </FormControl>
       </form>
 
-      <DateModal date={taskDate} onChangeDate={setTaskDate} />
-      <TimeModal date={taskDate} onChangeTime={setTaskDate} />
+      <DateModal date={newTodo.dueDate} onSetDate={onChangeTaskDetails} />
       <TaskPriorityModal
-        taskPriority={taskPriority}
-        onSetTask={setTaskPriority}
+        taskPriority={newTodo.priority}
+        onSetPriority={onChangeTaskDetails}
       />
       <TaskCategoryModal
-        taskCategory={taskCategory}
-        onSetPriority={setTaskCategory}
+        taskCategoryId={newTodo.categoryId}
+        onSetCategory={onChangeTaskDetails}
       />
     </CustomDialog>
   );

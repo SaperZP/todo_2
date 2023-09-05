@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
 import Box from '@mui/material/Box';
 import { ReactComponent as CustomFlagIcon } from '../../../../../assets/icons/flag.svg';
@@ -10,22 +10,29 @@ import { useTheme } from '@mui/material';
 
 type TaskPriorityModalProps = {
   taskPriority: number | null;
-  onSetTask: (value: number | null) => void;
+  onSetPriority: (toEditPart: Partial<ToDo>) => void;
+  updateTodo?: (todoPart: Partial<ToDo>) => void;
 };
 
 const TaskPriorityModal: React.FC<TaskPriorityModalProps> = ({
   taskPriority,
-  onSetTask,
+  onSetPriority,
+  updateTodo,
 }) => {
   const theme = useTheme();
   const priorityRange = Array.from({ length: 10 }, (_, i) => i + 1);
+  const initialPriority = useRef(taskPriority);
 
-  const onSaveHandler = () => {
+  const rightButtonHandler = () => {
+    if (updateTodo) {
+      updateTodo({ priority: taskPriority });
+    }
+
     CustomDialogEvents.emit('taskPriorityModal', false);
   };
 
-  const cancelHandler = () => {
-    onSetTask(null);
+  const lefButtonHandler = () => {
+    onSetPriority({ priority: initialPriority.current });
     CustomDialogEvents.emit('taskPriorityModal', false);
   };
 
@@ -33,12 +40,12 @@ const TaskPriorityModal: React.FC<TaskPriorityModalProps> = ({
     <CustomDialog id={'taskPriorityModal'}>
       <ModalPickersLayout
         leftButton={{
-          callback: cancelHandler,
+          callback: lefButtonHandler,
           text: 'Cancel',
         }}
         rightButton={{
-          callback: onSaveHandler,
-          text: 'Save',
+          callback: rightButtonHandler,
+          text: updateTodo ? 'Edit' : 'Save',
         }}
         title={'Task Priority'}
       >
@@ -52,7 +59,7 @@ const TaskPriorityModal: React.FC<TaskPriorityModalProps> = ({
             return (
               <CustomButton
                 key={index}
-                onClick={() => onSetTask(item)}
+                onClick={() => onSetPriority({ priority: item })}
                 containerSx={{
                   ...taskPriorityModalStyles.rangeItem,
                   ...isSelected,

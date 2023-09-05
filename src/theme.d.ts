@@ -6,6 +6,7 @@ declare module '@mui/material/styles' {
     project_color_black: PaletteColorOptions;
     project_color_gray: PaletteColorOptions;
     project_color_white: PaletteColorOptions;
+    project_color_red: PaletteColorOptions;
   }
 
   interface Palette {
@@ -13,5 +14,6 @@ declare module '@mui/material/styles' {
     project_color_black: PaletteColor;
     project_color_gray: PaletteColor;
     project_color_white: PaletteColor;
+    project_color_red: PaletteColor;
   }
 }

@@ -12,7 +12,7 @@ const initialState: todosInitType = {
       description: 'from todo to todo',
       dueDate: '2023-08-30T10:37:26.495Z',
       priority: 7,
-      categoryID: 'university',
+      categoryId: 'university',
       isDone: false,
     },
   ],
@@ -40,8 +40,13 @@ const TodosSlice = createSlice({
         return todo;
       });
     },
+    deleteTodo: (state, action: PayloadAction<{ todoId: string }>) => {
+      state.todos = state.todos.filter(
+        (todo) => todo.id !== action.payload.todoId
+      );
+    },
   },
 });
 
-export const { addTodo, editTodo } = TodosSlice.actions;
+export const { addTodo, editTodo, deleteTodo } = TodosSlice.actions;
 export default TodosSlice.reducer;

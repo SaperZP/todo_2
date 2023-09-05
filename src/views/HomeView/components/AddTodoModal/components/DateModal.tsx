@@ -1,58 +1,97 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import CustomDialog from '../../../../../components/CustomDialog/CustomDialog';
-import { dateModalStyles } from '../styles';
-import { DateCalendar } from '@mui/x-date-pickers';
+import { dateModalStyles, timeModalStyles } from '../styles';
+import { DateCalendar, MultiSectionDigitalClock } from '@mui/x-date-pickers';
 import CustomPickersCalendarHeader from '../../../../../components/CustomPickersCalendarHeader';
 import CustomDialogEvents from '../../../../../components/CustomDialog/CustomDialogEvents';
 import ModalPickersLayout from '../../../../../components/ModalPickersLayout/ModalPickersLayout';
+import { dateToISO } from '../../../../../utils/dateUtils';
+import Box from '@mui/material/Box';
 
 type DateModalProps = {
-  date: Date | null;
-  onChangeDate: (value: Date | null) => void;
+  date: ISODateString | null;
+  onSetDate: (toEditPart: Partial<ToDo>) => void;
+  updateTodo?: (todoPart: Partial<ToDo>) => void;
 };
 
-const DateModal: React.FC<DateModalProps> = ({ date, onChangeDate }) => {
+const DateModal: React.FC<DateModalProps> = ({
+  date,
+  onSetDate,
+  updateTodo,
+}) => {
+  const [isDateStage, setIsDateStage] = useState(true);
+  const initialDate = useRef(date);
+  let rightButtonText;
+
+  if (updateTodo) {
+    rightButtonText = isDateStage ? 'Choose time' : 'Save';
+  }
+
+  rightButtonText = isDateStage ? 'Edit time' : 'Edit';
+
   const onChangeDateHandler = (value: Date | null) => {
-    onChangeDate(value);
+    const normalizedDate = value ? dateToISO(value) : value;
+
+    onSetDate({ dueDate: normalizedDate });
   };
 
-  const onCancelHandler = () => {
-    onChangeDate(new Date());
+  const leftButtonHandler = () => {
+    onSetDate({ dueDate: initialDate.current });
+    setIsDateStage(true);
     CustomDialogEvents.emit('datePickerModal', false);
   };
 
-  const onChooseTimeHandler = () => {
-    CustomDialogEvents.emit('datePickerModal', false);
-    CustomDialogEvents.emit('timePickerModal', true);
+  const rightButtonHandler = () => {
+    setIsDateStage(false);
+    if (!isDateStage) {
+      setIsDateStage(true);
+      CustomDialogEvents.emit('datePickerModal', false);
+    }
+    if (updateTodo && !isDateStage) {
+      updateTodo({ dueDate: date });
+      setIsDateStage(true);
+    }
   };
 
   return (
     <CustomDialog persist id={'datePickerModal'}>
       <ModalPickersLayout
         leftButton={{
-          callback: onCancelHandler,
+          callback: leftButtonHandler,
           text: 'Cancel',
         }}
         rightButton={{
-          callback: onChooseTimeHandler,
-          text: 'Choose Time',
+          callback: rightButtonHandler,
+          text: rightButtonText,
         }}
       >
-        <DateCalendar
-          sx={dateModalStyles.dateCalendar}
-          value={date}
-          onChange={onChangeDateHandler}
-          showDaysOutsideCurrentMonth
-          disableHighlightToday
-          slots={{
-            calendarHeader: ({ currentMonth, onMonthChange }) => (
-              <CustomPickersCalendarHeader
-                currentMonth={currentMonth}
-                onMonthChange={onMonthChange}
-              />
-            ),
-          }}
-        />
+        {isDateStage ? (
+          <DateCalendar
+            disablePast
+            sx={dateModalStyles.dateCalendar}
+            value={date ? new Date(date) : date}
+            onChange={onChangeDateHandler}
+            showDaysOutsideCurrentMonth
+            slots={{
+              calendarHeader: ({ currentMonth, onMonthChange }) => (
+                <CustomPickersCalendarHeader
+                  currentMonth={currentMonth}
+                  onMonthChange={onMonthChange}
+                />
+              ),
+            }}
+          />
+        ) : (
+          <Box sx={timeModalStyles.multiSectionWrapper}>
+            <MultiSectionDigitalClock
+              sx={timeModalStyles.multiSection}
+              timeSteps={{ minutes: 1 }}
+              value={date ? new Date(date) : date}
+              onChange={onChangeDateHandler}
+              autoFocus={true}
+            />
+          </Box>
+        )}
       </ModalPickersLayout>
     </CustomDialog>
   );

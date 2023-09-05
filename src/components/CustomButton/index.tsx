@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { SvgIcon } from '@mui/material';
+import { SvgIcon, Theme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { customButtonStyles } from './styles';
 import { SystemStyleObject } from '@mui/system';
 
 interface CustomButtonProps {
   onClick?: () => void;
-  containerSx?: SystemStyleObject;
+  containerSx?: SystemStyleObject<Theme>;
   textSx?: SystemStyleObject;
   icon?: React.FC;
   iconSize?: number;

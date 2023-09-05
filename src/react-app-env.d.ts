@@ -1,12 +1,15 @@
 /// <reference types="react-scripts" />
 
+type ISODateString =
+  `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+
 type ToDo = {
   id: string;
   title: string;
   description: string | null;
-  dueDate: string | null;
+  dueDate: ISODateString | null;
   priority: number | null;
-  categoryID: string | null;
+  categoryId: string | null;
   isDone: boolean;
 };
 

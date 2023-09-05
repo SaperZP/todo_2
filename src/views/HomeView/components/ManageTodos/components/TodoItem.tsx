@@ -2,14 +2,13 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { ButtonBase } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { formatRelative } from 'date-fns';
-import { enGB } from 'date-fns/locale';
 import categoriesList from '../../../../../utils/categoriesList';
 import { todoItemStyles } from '../styles';
 import { ReactComponent as FlagCustomIcon } from '../../../../../assets/icons/flag.svg';
 import CustomBadge from '../../../../../components/Badge/CustomBadge';
 import { useNavigate } from 'react-router-dom';
 import StatusRadioButton from '../../../../../components/StatusRadioButton/StatusRadioButton';
+import { getReadableDate } from '../../../../../utils/dateUtils';
 
 type todoItemProps = {
   todo: ToDo;
@@ -18,13 +17,9 @@ type todoItemProps = {
 const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
   const navigate = useNavigate();
 
-  const date = todo.dueDate
-    ? formatRelative(new Date(todo.dueDate), new Date(), { locale: enGB })
-    : 'no date';
-
   const Category = () => {
     const matchedCategory = categoriesList.find(
-      (category) => category.id === todo.categoryID
+      (category) => category.id === todo.categoryId
     );
 
     return matchedCategory ? (
@@ -52,7 +47,7 @@ const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
         <Typography sx={todoItemStyles.title}>{todo.title}</Typography>
         <Box sx={todoItemStyles.mainContentBottom}>
           <Typography sx={todoItemStyles.dateText} variant={'subtitle2'}>
-            {date}
+            {getReadableDate(todo.dueDate)}
           </Typography>
           <Box sx={todoItemStyles.mainContentBadges}>
             <Category />

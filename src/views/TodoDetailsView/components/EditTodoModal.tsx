@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import CustomDialog from '../../../components/CustomDialog/CustomDialog';
 import ModalPickersLayout from '../../../components/ModalPickersLayout/ModalPickersLayout';
 import { StyledTextField } from '../../../components/styledComponents';
