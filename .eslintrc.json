@@ -1,4 +1,5 @@
 {
+  "ignorePatterns": ["./src/graphql/gqlTypes/**.ts"],
   "settings": {
     "react": {
       "version": "detect"

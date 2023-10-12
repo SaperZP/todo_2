@@ -4,13 +4,15 @@ import ProjectThemeProvider from './theme/ProjectThemeProvider';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { RouterProvider } from 'react-router-dom';
-import viewRouter from './routes/viewRoutes';
+import useGetRoute from './routes';
 
 function App() {
+  const route = useGetRoute();
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ProjectThemeProvider>
-        <RouterProvider router={viewRouter} />
+        <RouterProvider router={route} />
       </ProjectThemeProvider>
     </LocalizationProvider>
   );

@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { AppBar } from '@mui/material';
 import { headerStyle } from './styles';
+import { authToken } from '../../../../graphql/client';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -20,6 +21,15 @@ function Header() {
   };
 
   const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleMenuItemPress = (menuItem: string) => {
+    if (menuItem === 'Logout') {
+      localStorage.removeItem('token');
+
+      authToken('');
+    }
     setAnchorElUser(null);
   };
 
@@ -62,7 +72,10 @@ function Header() {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <MenuItem
+                key={setting}
+                onClick={() => handleMenuItemPress(setting)}
+              >
                 <Typography textAlign="center">{setting}</Typography>
               </MenuItem>
             ))}

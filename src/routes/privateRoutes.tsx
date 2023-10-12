@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import HomeView from '../views/HomeView';
 import CalendarView from '../views/CalendarView';
@@ -6,7 +6,7 @@ import React from 'react';
 import ErrorPage from './ErrorPage';
 import TodoDetailsView from '../views/TodoDetailsView/TodoDetailsView';
 
-const viewRouter = createBrowserRouter([
+const privateRoutes = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
@@ -22,10 +22,21 @@ const viewRouter = createBrowserRouter([
       },
     ],
   },
+
   {
     element: <TodoDetailsView />,
     path: '/task/:taskId',
   },
+
+  {
+    element: <Navigate to={'/'} replace />,
+    path: '/signup',
+  },
+
+  {
+    element: <Navigate to={'/'} replace />,
+    path: '/signin',
+  },
 ]);
 
-export default viewRouter;
+export default privateRoutes;
