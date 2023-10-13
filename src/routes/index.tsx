@@ -6,8 +6,6 @@ import { authToken } from '../graphql/client';
 const useGetRoute = () => {
   const authorized = useReactiveVar(authToken);
 
-  console.log(authorized, 'from routes/index');
-
   return authorized ? privateRoutes : publicRoutes;
 };
 

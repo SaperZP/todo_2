@@ -12,8 +12,6 @@ import {
 } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import SIGN_UP from '../../graphql/mutations/signUp';
-import { Simulate } from 'react-dom/test-utils';
-import input = Simulate.input;
 import { authToken } from '../../graphql/client';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,7 +40,7 @@ const WelcomeInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
+const WelcomeInputLabel = styled(InputLabel)(({ theme }) => ({
   color: theme.palette.project_color_white.main,
 }));
 
@@ -94,9 +92,9 @@ const SignUpView = () => {
         }}
       >
         <FormControl variant="standard">
-          <StyledInputLabel shrink htmlFor="username">
+          <WelcomeInputLabel shrink htmlFor="username">
             Username
-          </StyledInputLabel>
+          </WelcomeInputLabel>
           <WelcomeInput
             value={userName}
             onChange={(event) => setUserName(event.target.value)}
@@ -108,9 +106,9 @@ const SignUpView = () => {
         </FormControl>
 
         <FormControl variant="standard">
-          <StyledInputLabel shrink htmlFor="email">
+          <WelcomeInputLabel shrink htmlFor="email">
             Email
-          </StyledInputLabel>
+          </WelcomeInputLabel>
           <WelcomeInput
             value={email}
             onChange={(event) => setEmail(event.target.value)}
@@ -122,9 +120,9 @@ const SignUpView = () => {
         </FormControl>
 
         <FormControl variant="standard">
-          <StyledInputLabel shrink htmlFor="password">
+          <WelcomeInputLabel shrink htmlFor="password">
             Password
-          </StyledInputLabel>
+          </WelcomeInputLabel>
           <WelcomeInput
             value={password}
             onChange={(event) => setPassword(event.target.value)}
