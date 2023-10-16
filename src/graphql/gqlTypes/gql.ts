@@ -13,10 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  mutation SignUp($input: SignUpInput) {\n    signUp(input: $input) {\n      token\n      user {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n':
-    types.SignUpDocument,
-  '\n  query GetTodo($getTodoId: ID!) {\n    getTodo(id: $getTodoId) {\n      id\n      title\n      description\n      dueDate\n      priority\n      categoryId\n      isDone\n      ownerId\n      owner {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n':
-    types.GetTodoDocument,
+    "\n  mutation SignIn($input: SignInInput) {\n    signIn(input: $input) {\n      token\n      user {\n        name\n        id\n        avatar\n        email\n      }\n    }\n  }\n": types.SignInDocument,
+    "\n  mutation SignUp($input: SignUpInput) {\n    signUp(input: $input) {\n      token\n      user {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n": types.SignUpDocument,
+    "\n  query GetTodo($getTodoId: ID!) {\n    getTodo(id: $getTodoId) {\n      id\n      title\n      description\n      dueDate\n      priority\n      categoryId\n      isDone\n      ownerId\n      owner {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n": types.GetTodoDocument,
 };
 
 /**
@@ -36,19 +35,18 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  mutation SignUp($input: SignUpInput) {\n    signUp(input: $input) {\n      token\n      user {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n'
-): (typeof documents)['\n  mutation SignUp($input: SignUpInput) {\n    signUp(input: $input) {\n      token\n      user {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n'];
+export function graphql(source: "\n  mutation SignIn($input: SignInInput) {\n    signIn(input: $input) {\n      token\n      user {\n        name\n        id\n        avatar\n        email\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation SignIn($input: SignInInput) {\n    signIn(input: $input) {\n      token\n      user {\n        name\n        id\n        avatar\n        email\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: '\n  query GetTodo($getTodoId: ID!) {\n    getTodo(id: $getTodoId) {\n      id\n      title\n      description\n      dueDate\n      priority\n      categoryId\n      isDone\n      ownerId\n      owner {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n'
-): (typeof documents)['\n  query GetTodo($getTodoId: ID!) {\n    getTodo(id: $getTodoId) {\n      id\n      title\n      description\n      dueDate\n      priority\n      categoryId\n      isDone\n      ownerId\n      owner {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n'];
+export function graphql(source: "\n  mutation SignUp($input: SignUpInput) {\n    signUp(input: $input) {\n      token\n      user {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation SignUp($input: SignUpInput) {\n    signUp(input: $input) {\n      token\n      user {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetTodo($getTodoId: ID!) {\n    getTodo(id: $getTodoId) {\n      id\n      title\n      description\n      dueDate\n      priority\n      categoryId\n      isDone\n      ownerId\n      owner {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetTodo($getTodoId: ID!) {\n    getTodo(id: $getTodoId) {\n      id\n      title\n      description\n      dueDate\n      priority\n      categoryId\n      isDone\n      ownerId\n      owner {\n        id\n        name\n        email\n        avatar\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;

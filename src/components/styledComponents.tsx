@@ -1,4 +1,12 @@
-import { Dialog, Fab, styled, TextField } from '@mui/material';
+import {
+  alpha,
+  Dialog,
+  Fab,
+  InputBase,
+  InputLabel,
+  styled,
+  TextField,
+} from '@mui/material';
 import Container from '@mui/material/Container';
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -73,4 +81,33 @@ export const StyledContainer = styled(Container)(({ theme }) => ({
   height: '100vh',
   flexDirection: 'column',
   backgroundColor: theme.palette.project_color_black.main,
+}));
+
+export const WelcomeInput = styled(InputBase)(({ theme }) => ({
+  'label + &': {
+    marginTop: theme.spacing(3),
+  },
+  '& .MuiInputBase-input': {
+    borderRadius: 4,
+    position: 'relative',
+    color: theme.palette.project_color_gray.main,
+    border: '1px solid',
+    borderColor: theme.palette.project_color_gray.main,
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
+    transition: theme.transitions.create([
+      'border-color',
+      'background-color',
+      'box-shadow',
+    ]),
+    '&:focus': {
+      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}));
+
+export const WelcomeInputLabel = styled(InputLabel)(({ theme }) => ({
+  color: theme.palette.project_color_white.main,
 }));
