@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { todoDetailsStyles } from './styles';
 import { StyledContainer } from '../../components/styledComponents';
 import CustomButton from '../../components/CustomButton';
 import StatusRadioButton from '../../components/StatusRadioButton/StatusRadioButton';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { ReactComponent as EditCustomIcon } from '../../assets/icons/edit.svg';
 import EditTodoModal from './components/EditTodoModal';
-import { editTodo, deleteTodo } from '../../store/todosReducer';
 import CustomDialogEvents from '../../components/CustomDialog/CustomDialogEvents';
 import EditTodoSection from './components/EditTodoSection';
 import { ReactComponent as ClockCustomIcon } from '../../assets/icons/clock.svg';
@@ -23,19 +21,32 @@ import DateModal from '../../components/DateModal';
 import TaskCategoryModal from '../../components/TaskCategoryModal';
 import TaskPriorityModal from '../../components/TaskPriorityModal';
 import DeleteTodoModal from './components/DeleteTodoModal';
+import { useMutation, useQuery } from '@apollo/client';
+import GET_TODO from '../../graphql/queries/getTodo';
+import DELETE_TODO from '../../graphql/mutations/deleteTodo';
+import UPDATE_TODO from '../../graphql/mutations/updateTodo';
 
 const TodoDetailsView = () => {
   const { taskId } = useParams();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const [updateTodo] = useMutation(UPDATE_TODO);
+  const [deleteTodo] = useMutation(DELETE_TODO);
 
-  const { todos } = useAppSelector((state) => state.todosData);
-  const [toEdit, setToEdit] = useState(() =>
-    todos.find((todo) => todo.id === taskId)
-  );
+  if (!taskId) {
+    return <Typography color={'red'}> Wrong task id</Typography>;
+  }
+
+  const { data, loading: loadingTodo } = useQuery(GET_TODO, {
+    variables: { getTodoId: taskId },
+  });
+  const [toEdit, setToEdit] = useState<ToDo | undefined>();
   const category = categoriesList.find(
     (category) => category.id === toEdit?.categoryId
   );
+
+  useEffect(() => {
+    setToEdit(data?.getTodo);
+  }, [data]);
 
   const handleClose = () => {
     navigate('/');
@@ -47,20 +58,23 @@ const TodoDetailsView = () => {
     );
   };
 
-  const updateTodo = (todoPart: Partial<ToDo>) =>
-    taskId &&
-    dispatch(
-      editTodo({
-        todoId: taskId,
-        todoProp: todoPart,
-      })
-    );
+  const updateTodoHandler = (todoPart: Partial<ToDo>) => {
+    updateTodo({
+      variables: {
+        updateToDoId: taskId,
+        input: todoPart,
+      },
+    });
+  };
 
-  const deleteToDo = () => {
-    if (taskId) {
-      dispatch(deleteTodo({ todoId: taskId }));
-      navigate('/');
-    }
+  const deleteTodoHandler = () => {
+    deleteTodo({
+      variables: {
+        deleteToDoId: taskId,
+      },
+    });
+
+    handleClose();
   };
 
   const handleOpenEditTodo = () => {
@@ -69,7 +83,7 @@ const TodoDetailsView = () => {
 
   return (
     <StyledContainer sx={todoDetailsStyles.container} maxWidth={'sm'}>
-      {toEdit ? (
+      {toEdit && !loadingTodo ? (
         <>
           <Box sx={todoDetailsStyles.header}>
             <CustomButton
@@ -81,7 +95,10 @@ const TodoDetailsView = () => {
 
           <Box sx={todoDetailsStyles.mainDetails}>
             <Box>
-              <StatusRadioButton todo={toEdit} />
+              <StatusRadioButton
+                todo={toEdit}
+                updateStatus={updateTodoHandler}
+              />
             </Box>
 
             <Box sx={todoDetailsStyles.mainDetailsText}>
@@ -136,28 +153,28 @@ const TodoDetailsView = () => {
             taskName={toEdit.title}
             taskDescription={toEdit.description}
             prepareToEdit={prepareToEdit}
-            updateTodoHandler={updateTodo}
+            updateTodoHandler={updateTodoHandler}
           />
 
           <DateModal
             date={toEdit.dueDate}
             onSetDate={prepareToEdit}
-            updateTodo={updateTodo}
+            updateTodo={updateTodoHandler}
           />
           <TaskCategoryModal
             taskCategoryId={toEdit.categoryId}
             onSetCategory={prepareToEdit}
-            updateTodo={updateTodo}
+            updateTodo={updateTodoHandler}
           />
           <TaskPriorityModal
             taskPriority={toEdit.priority}
             onSetPriority={prepareToEdit}
-            updateTodo={updateTodo}
+            updateTodo={updateTodoHandler}
           />
-          <DeleteTodoModal onDelete={deleteToDo} />
+          <DeleteTodoModal onDelete={deleteTodoHandler} />
         </>
       ) : (
-        'error - no todo'
+        <Typography color={'red'}> error - no todo</Typography>
       )}
     </StyledContainer>
   );

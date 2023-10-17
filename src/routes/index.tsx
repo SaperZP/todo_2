@@ -13,10 +13,10 @@ const useGetRoute = () => {
 
       try {
         decodedToken = jwt_decode<{ exp: number }>(token);
-        console.log(decodedToken);
       } catch (e) {
-        console.error(e);
+        console.info(e);
         localStorage.removeItem('token');
+        authToken('');
         return false;
       }
 

@@ -9,6 +9,8 @@ import CustomBadge from '../../../../../components/Badge/CustomBadge';
 import { useNavigate } from 'react-router-dom';
 import StatusRadioButton from '../../../../../components/StatusRadioButton/StatusRadioButton';
 import { getReadableDate } from '../../../../../utils/dateUtils';
+import { useMutation } from '@apollo/client';
+import UPDATE_TODO from '../../../../../graphql/mutations/updateTodo';
 
 type todoItemProps = {
   todo: ToDo;
@@ -16,6 +18,16 @@ type todoItemProps = {
 
 const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
   const navigate = useNavigate();
+  const [updateTodo] = useMutation(UPDATE_TODO);
+
+  const updateTodoHandler = (todoPart: Partial<ToDo>) => {
+    updateTodo({
+      variables: {
+        updateToDoId: todo.id,
+        input: todoPart,
+      },
+    });
+  };
 
   const Category = () => {
     const matchedCategory = categoriesList.find(
@@ -41,7 +53,7 @@ const TodoItem: React.FC<todoItemProps> = ({ todo }) => {
   return (
     <ButtonBase onClick={handleTodoClick} sx={todoItemStyles.wrapper}>
       <Box sx={todoItemStyles.radioButtonWrapper}>
-        <StatusRadioButton todo={todo} />
+        <StatusRadioButton todo={todo} updateStatus={updateTodoHandler} />
       </Box>
       <Box sx={todoItemStyles.mainContentWrapper}>
         <Typography sx={todoItemStyles.title}>{todo.title}</Typography>

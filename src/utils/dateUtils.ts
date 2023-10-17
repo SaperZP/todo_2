@@ -3,7 +3,7 @@ import { enGB } from 'date-fns/locale';
 
 export function dateToISO(date: Date | null) {
   if (date instanceof Date) {
-    return new Date(date).toISOString() as ISODateString;
+    return new Date(date).toISOString();
   }
 
   return null;

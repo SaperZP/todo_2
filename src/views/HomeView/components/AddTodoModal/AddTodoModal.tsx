@@ -7,18 +7,16 @@ import { ReactComponent as ClockIcon } from '../../../../assets/icons/clock.svg'
 import { ReactComponent as TagIcon } from '../../../../assets/icons/label.svg';
 import { ReactComponent as FlagIcon } from '../../../../assets/icons/flag.svg';
 import { ReactComponent as SendIcon } from '../../../../assets/icons/send.svg';
-import { addTodo } from '../../../../store/todosReducer';
-import uuid from 'react-uuid';
 import CustomDialog from '../../../../components/CustomDialog/CustomDialog';
 import CustomDialogEvents from '../../../../components/CustomDialog/CustomDialogEvents';
 import DateModal from '../../../../components/DateModal';
 import TaskPriorityModal from '../../../../components/TaskPriorityModal';
 import TaskCategoryModal from '../../../../components/TaskCategoryModal';
-import { useAppDispatch } from '../../../../store/hooks';
 import { dateToISO } from '../../../../utils/dateUtils';
+import { useMutation } from '@apollo/client';
+import CREATE_TODO from '../../../../graphql/mutations/createTodo';
 
 const emptyTodo = {
-  id: '',
   title: '',
   description: '',
   dueDate: dateToISO(new Date()),
@@ -28,9 +26,8 @@ const emptyTodo = {
 };
 
 const AddTodoModal = () => {
-  const [newTodo, setNewTodo] = useState<ToDo>(emptyTodo);
-
-  const dispatch = useAppDispatch();
+  const [createTodo] = useMutation(CREATE_TODO);
+  const [newTodo, setNewTodo] = useState<Omit<ToDo, 'id'>>(emptyTodo);
 
   const changeTextHandler = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -50,16 +47,15 @@ const AddTodoModal = () => {
 
   const addTodoHandler = (event: FormEvent) => {
     event.preventDefault();
-    const id = uuid();
 
     CustomDialogEvents.emit('addTodoModal', false);
 
-    dispatch(
-      addTodo({
-        ...newTodo,
-        id,
-      })
-    );
+    createTodo({
+      variables: {
+        input: { ...newTodo },
+      },
+    });
+
     setNewTodo(emptyTodo);
   };
 

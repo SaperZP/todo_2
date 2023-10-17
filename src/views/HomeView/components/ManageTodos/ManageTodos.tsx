@@ -5,19 +5,19 @@ import { StyledTextField } from '../../../../components/styledComponents';
 import { InputAdornment } from '@mui/material';
 import { ReactComponent as MagCustomIcon } from '../../../../assets/icons/mag.svg';
 import TodosList from './components/TodosList';
-import { useAppSelector } from '../../../../store/hooks';
 import { useDebouncedCallback } from 'use-debounce';
-
-type TodosListProps = {
-  todos: ToDo[];
-};
+import { useQuery } from '@apollo/client';
+import MY_TODOS from '../../../../graphql/queries/myTodos';
 
 interface categoryType {
   [key: string]: ToDo[];
 }
 
-const ManageTodos: React.FC<TodosListProps> = () => {
-  const { todos } = useAppSelector((state) => state.todosData);
+const ManageTodos = () => {
+  // const { todos } = useAppSelector((state) => state.todosData);
+  const { data } = useQuery(MY_TODOS);
+  const todos = data?.myTodos ? data.myTodos : [];
+
   const [searchString, setSearchString] = useState('');
   const [matchedTodos, setMatchedTodos] = useState(todos);
 

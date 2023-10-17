@@ -9,7 +9,7 @@ import { dateToISO } from '../../utils/dateUtils';
 import Box from '@mui/material/Box';
 
 type DateModalProps = {
-  date: ISODateString | null;
+  date: string | null;
   onSetDate: (toEditPart: Partial<ToDo>) => void;
   updateTodo?: (todoPart: Partial<ToDo>) => void;
 };
@@ -69,7 +69,7 @@ const DateModal: React.FC<DateModalProps> = ({
           <DateCalendar
             disablePast
             sx={dateModalStyles.dateCalendar}
-            value={date ? new Date(date) : date}
+            value={typeof date === 'string' ? new Date(date) : date}
             onChange={onChangeDateHandler}
             showDaysOutsideCurrentMonth
             slots={{
@@ -86,7 +86,7 @@ const DateModal: React.FC<DateModalProps> = ({
             <MultiSectionDigitalClock
               sx={timeModalStyles.multiSection}
               timeSteps={{ minutes: 1 }}
-              value={date ? new Date(date) : date}
+              value={typeof date === 'string' ? new Date(date) : date}
               onChange={onChangeDateHandler}
               autoFocus={true}
             />
