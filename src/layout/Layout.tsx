@@ -22,7 +22,7 @@ const Layout = () => {
   const currentView = useLocation().pathname;
 
   return (
-    <StyledContainer disableGutters maxWidth={'sm'}>
+    <StyledContainer disableGutters>
       <Box sx={layoutStyles.outletHolder}>
         <Outlet />
       </Box>

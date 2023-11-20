@@ -78,6 +78,7 @@ export const StyledFab = styled(Fab)(({ theme }) => ({
 
 export const StyledContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
+  maxWidth: theme.breakpoints.values.sm,
   height: '100vh',
   flexDirection: 'column',
   backgroundColor: theme.palette.project_color_black.main,
@@ -87,6 +88,7 @@ export const WelcomeInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
     marginTop: theme.spacing(3),
   },
+
   '& .MuiInputBase-input': {
     borderRadius: 4,
     position: 'relative',
@@ -94,15 +96,14 @@ export const WelcomeInput = styled(InputBase)(({ theme }) => ({
     border: '1px solid',
     borderColor: theme.palette.project_color_gray.main,
     fontSize: 16,
-    width: 'auto',
+    width: '100%',
     padding: '10px 12px',
     transition: theme.transitions.create([
       'border-color',
       'background-color',
       'box-shadow',
     ]),
-    '&:focus': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+    '&:hover, &:focus': {
       borderColor: theme.palette.primary.main,
     },
   },

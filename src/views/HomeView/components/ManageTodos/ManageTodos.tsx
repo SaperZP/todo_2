@@ -14,7 +14,6 @@ interface categoryType {
 }
 
 const ManageTodos = () => {
-  // const { todos } = useAppSelector((state) => state.todosData);
   const { data } = useQuery(MY_TODOS);
   const todos = data?.myTodos ? data.myTodos : [];
 

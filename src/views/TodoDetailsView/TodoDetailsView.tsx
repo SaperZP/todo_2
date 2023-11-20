@@ -27,19 +27,15 @@ import DELETE_TODO from '../../graphql/mutations/deleteTodo';
 import UPDATE_TODO from '../../graphql/mutations/updateTodo';
 
 const TodoDetailsView = () => {
-  const { taskId } = useParams();
+  const { taskId } = useParams() as { taskId: string };
   const navigate = useNavigate();
   const [updateTodo] = useMutation(UPDATE_TODO);
   const [deleteTodo] = useMutation(DELETE_TODO);
-
-  if (!taskId) {
-    return <Typography color={'red'}> Wrong task id</Typography>;
-  }
-
   const { data, loading: loadingTodo } = useQuery(GET_TODO, {
     variables: { getTodoId: taskId },
   });
   const [toEdit, setToEdit] = useState<ToDo | undefined>();
+
   const category = categoriesList.find(
     (category) => category.id === toEdit?.categoryId
   );
@@ -81,8 +77,12 @@ const TodoDetailsView = () => {
     CustomDialogEvents.emit('EditTodoModal', true);
   };
 
+  if (!taskId) {
+    return <Typography color={'red'}> Wrong task id</Typography>;
+  }
+
   return (
-    <StyledContainer sx={todoDetailsStyles.container} maxWidth={'sm'}>
+    <StyledContainer sx={todoDetailsStyles.container}>
       {toEdit && !loadingTodo ? (
         <>
           <Box sx={todoDetailsStyles.header}>

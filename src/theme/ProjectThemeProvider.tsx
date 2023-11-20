@@ -16,6 +16,10 @@ const ProjectThemeProvider: React.FC<Props> = ({ children }) => {
         },
         typography: {
           fontFamily: 'Lato, sans-serif',
+          h1: {
+            fontSize: '32px',
+            fontWeight: 700,
+          },
         },
       }),
     []

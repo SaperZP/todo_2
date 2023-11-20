@@ -10,14 +10,14 @@ const WelcomeView = () => {
   const navigate = useNavigate();
 
   return (
-    <StyledContainer disableGutters maxWidth={'sm'}>
+    <StyledContainer disableGutters>
       <Box sx={welcomeViewStyles.wrapper}>
         <Box sx={welcomeViewStyles.section}>
           <Typography component={'h1'} sx={welcomeViewStyles.title}>
             Welcome to Todo
           </Typography>
           <Typography component={'h2'} sx={welcomeViewStyles.text}>
-            Please login to your account or create new account to continue
+            Please login to your account or create a new account to continue
           </Typography>
         </Box>
         <Box sx={welcomeViewStyles.section}>

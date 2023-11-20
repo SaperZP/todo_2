@@ -1,5 +1,6 @@
 const PROJECT_COLOR_BLUE = {
   main: '#8687E7',
+  light: '#8687E780',
 };
 
 const PROJECT_COLOR_BLACK = {
@@ -15,6 +16,7 @@ const PROJECT_COLOR_GRAY = {
 
 const PROJECT_COLOR_WHITE = {
   main: '#FFFFFFDE',
+  light: '#FFFFFF80',
 };
 
 const PROJECT_COLOR_RED = {
