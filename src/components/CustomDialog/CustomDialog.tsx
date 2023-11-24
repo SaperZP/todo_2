@@ -12,6 +12,8 @@ type CustomDialogProps = {
  * Custom pre-styled modal window.
  * Relies on MUI and Events packages
  * @param id - unique name of modal instance
+ * @param persist
+ * @param children
  *
  * to open or close modal use:
  *
@@ -32,7 +34,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
     return () => {
       CustomDialogEvents.off(id, listener);
     };
-  }, []);
+  });
 
   return (
     <StyledDialog

@@ -5,7 +5,7 @@ import { makeVar } from '@apollo/client';
 export const authToken = makeVar(localStorage.getItem('token'));
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/',
+  uri: 'https://todo-2-server.onrender.com/',
 });
 
 const authLink = setContext((_, { headers }) => {

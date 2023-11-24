@@ -1,5 +1,4 @@
 import {
-  alpha,
   Dialog,
   Fab,
   InputBase,

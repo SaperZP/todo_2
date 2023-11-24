@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import { manageTodosStyles } from './styles';
 import { StyledTextField } from '../../../../components/styledComponents';
@@ -15,7 +15,7 @@ interface categoryType {
 
 const ManageTodos = () => {
   const { data } = useQuery(MY_TODOS);
-  const todos = data?.myTodos ? data.myTodos : [];
+  const todos = useMemo(() => (data?.myTodos ? data.myTodos : []), [data]);
 
   const [searchString, setSearchString] = useState('');
   const [matchedTodos, setMatchedTodos] = useState(todos);

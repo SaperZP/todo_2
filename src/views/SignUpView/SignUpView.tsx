@@ -49,7 +49,7 @@ const SignUpView = () => {
     1
   );
 
-  const allFieldsValid = (input: ValidationResult<Record<string, string>>) =>
+  const isAllFieldsValid = (input: ValidationResult<Record<string, string>>) =>
     !Object.values(input).some((value) => typeof value === 'string' || !value);
 
   const setFieldsHandler = (
@@ -63,9 +63,8 @@ const SignUpView = () => {
 
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(allFieldsValid(flush()), 'after');
 
-    if (allFieldsValid(flush())) {
+    if (isAllFieldsValid(flush())) {
       try {
         await createUser({
           variables: {
@@ -156,7 +155,7 @@ const SignUpView = () => {
         </FormControl>
 
         <Button
-          disabled={!allFieldsValid(fieldsValidationStatus)}
+          disabled={!isAllFieldsValid(fieldsValidationStatus)}
           sx={signUpViewStyles.submitButton}
           variant={'contained'}
           type={'submit'}
