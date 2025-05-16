@@ -78,9 +78,11 @@ export const StyledFab = styled(Fab)(({ theme }) => ({
 export const StyledContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   maxWidth: theme.breakpoints.values.sm,
+  maxHeight: '1024px',
   height: '100vh',
   flexDirection: 'column',
   backgroundColor: theme.palette.project_color_black.main,
+  borderRadius: 25,
 }));
 
 export const WelcomeInput = styled(InputBase)(({ theme }) => ({

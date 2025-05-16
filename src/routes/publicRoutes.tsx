@@ -4,22 +4,27 @@ import ErrorPage from './ErrorPage';
 import WelcomeView from '../views/WelcomeView';
 import SignUpView from '../views/SignUpView';
 import SignInView from '../views/SignInView';
+import Layout from '../layout/Layout';
 
 const publicRoutes = createBrowserRouter([
   {
     path: '/',
-    element: <WelcomeView />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: '/signup',
-    element: <SignUpView />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/signin',
-    element: <SignInView />,
-    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <WelcomeView />,
+      },
+      {
+        path: '/signup',
+        element: <SignUpView />,
+      },
+      {
+        path: '/signin',
+        element: <SignInView />,
+      },
+    ],
   },
 ]);
 

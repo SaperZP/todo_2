@@ -1,46 +1,81 @@
-# Getting Started with Create React App
+# Todo 2 Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, full-stack Todo application built with React, TypeScript, GraphQL, and Tailwind CSS. This frontend interfaces seamlessly with the [Todo 2 API Server](https://github.com/SaperZP/todo_2_server) to provide a robust task management experience.
 
-## Available Scripts
+## 🌐 Live Demo
 
-In the project directory, you can run:
+[https://todo2-app.bilous.info](https://todo2-app.bilous.info)
 
-### `npm start`
+## 🚀 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React**
+- **TypeScript**
+- **GraphQL**
+- **Apollo Client**
+- **Tailwind CSS**
+- **React Hook Form**
+- **Shadcn UI**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 📦 Features
 
-### `npm test`
+- Create, read, update, and delete todos
+- Toggle completion status
+- Responsive design for all devices
+- Form validation with React Hook Form
+- Styled with Tailwind CSS and Shadcn UI components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠 Installation
 
-### `npm run build`
+```bash
+git clone https://github.com/SaperZP/todo_2.git
+cd todo_2
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Environment Variables
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create a `.env` file in the root directory and add the following:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```env
+REACT_APP_API_URL=https://todo2-api.bilous.info/graphql
+```
 
-### `npm run eject`
+## ▶️ Running the App
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The app will run at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🧪 Example Usage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **View Todos**: See a list of all your tasks.
+- **Add Todo**: Use the input form to add a new task.
+- **Toggle Completion**: Click on a task to mark it as completed or not.
+- **Delete Todo**: Remove a task from your list.
 
-## Learn More
+## 📁 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+todo_2/
+├── public/
+├── src/
+│   ├── components/
+│   ├── graphql/
+│   ├── pages/
+│   ├── styles/
+│   ├── App.tsx
+│   └── index.tsx
+├── .env
+├── package.json
+└── tsconfig.json
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+> Created by [Andriy Bilous](https://github.com/SaperZP)

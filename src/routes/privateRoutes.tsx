@@ -9,7 +9,7 @@ import TodoDetailsView from '../views/TodoDetailsView/TodoDetailsView';
 const privateRoutes = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <Layout withAppBar />,
     errorElement: <ErrorPage />,
     children: [
       {

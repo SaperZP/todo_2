@@ -5,6 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { RouterProvider } from 'react-router-dom';
 import useGetRoute from './routes';
+import Box from '@mui/material/Box';
 
 function App() {
   const route = useGetRoute();
@@ -12,7 +13,9 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <ProjectThemeProvider>
-        <RouterProvider router={route} />
+        <Box sx={{}}>
+          <RouterProvider router={route} />
+        </Box>
       </ProjectThemeProvider>
     </LocalizationProvider>
   );

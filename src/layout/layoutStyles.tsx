@@ -1,6 +1,12 @@
 import { SxProps, Theme } from '@mui/material';
 
 export const layoutStyles = {
+  rootContainer: {
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   outletHolder: {
     display: 'flex',
     flexDirection: 'column',

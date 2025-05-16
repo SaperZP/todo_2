@@ -17,59 +17,67 @@ import { StyledContainer, StyledFab } from '../components/styledComponents';
 import CustomDialogEvents from '../components/CustomDialog/CustomDialogEvents';
 import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+type LayoutProps = {
+  withAppBar?: boolean;
+};
+
+const Layout: React.FC<LayoutProps> = ({ withAppBar }) => {
   const navigate = useNavigate();
   const currentView = useLocation().pathname;
 
   return (
-    <StyledContainer disableGutters>
-      <Box sx={layoutStyles.outletHolder}>
-        <Outlet />
-      </Box>
+    <Box sx={layoutStyles.rootContainer}>
+      <StyledContainer disableGutters>
+        <Box sx={layoutStyles.outletHolder}>
+          <Outlet />
+        </Box>
 
-      <AppBar sx={layoutStyles.layoutFooter} component={'footer'}>
-        <Toolbar sx={{ height: '100px' }}>
-          <StyledFab
-            onClick={() => CustomDialogEvents.emit('addTodoModal', true)}
-            color="secondary"
-            aria-label="add"
-          >
-            <AddIcon />
-          </StyledFab>
+        {withAppBar && (
+          <AppBar sx={layoutStyles.layoutFooter} component={'footer'}>
+            <Toolbar sx={{ height: '100px' }}>
+              <StyledFab
+                onClick={() => CustomDialogEvents.emit('addTodoModal', true)}
+                color="secondary"
+                aria-label="add"
+              >
+                <AddIcon />
+              </StyledFab>
 
-          <Box sx={layoutStyles.toolbarSection}>
-            <CustomButton
-              muiButtonProps={{}}
-              text={'Home'}
-              textPosition={'bottom'}
-              icon={currentView === '/' ? HomeIconActive : HomeIcon}
-              onClick={() => navigate('/')}
-            />
+              <Box sx={layoutStyles.toolbarSection}>
+                <CustomButton
+                  muiButtonProps={{}}
+                  text={'Home'}
+                  textPosition={'bottom'}
+                  icon={currentView === '/' ? HomeIconActive : HomeIcon}
+                  onClick={() => navigate('/')}
+                />
 
-            <CustomButton
-              text={'Calendar'}
-              textPosition={'bottom'}
-              icon={currentView === '/calendar' ? CalendarActive : Calendar}
-              onClick={() => navigate('/calendar')}
-            />
+                <CustomButton
+                  text={'Calendar'}
+                  textPosition={'bottom'}
+                  icon={currentView === '/calendar' ? CalendarActive : Calendar}
+                  onClick={() => navigate('/calendar')}
+                />
 
-            <CustomButton
-              text={'Focus'}
-              textPosition={'bottom'}
-              icon={currentView === '/focus' ? FocusActive : Focus}
-              onClick={() => navigate('/focus')}
-            />
+                <CustomButton
+                  text={'Focus'}
+                  textPosition={'bottom'}
+                  icon={currentView === '/focus' ? FocusActive : Focus}
+                  onClick={() => navigate('/focus')}
+                />
 
-            <CustomButton
-              text={'Profile'}
-              textPosition={'bottom'}
-              icon={Profile}
-              onClick={() => navigate('/profile')}
-            />
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </StyledContainer>
+                <CustomButton
+                  text={'Profile'}
+                  textPosition={'bottom'}
+                  icon={Profile}
+                  onClick={() => navigate('/profile')}
+                />
+              </Box>
+            </Toolbar>
+          </AppBar>
+        )}
+      </StyledContainer>
+    </Box>
   );
 };
 
