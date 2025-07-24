@@ -19,9 +19,9 @@ import { authToken } from '../../graphql/client';
 import { signUpViewStyles } from './styles';
 import CustomButton from '../../components/CustomButton';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as ChevronLeftIcon } from '../../assets/icons/chevronLeft.svg';
-import { ReactComponent as GoogleIcon } from '../../assets/icons/google-icon.svg';
-import { ReactComponent as AppleIcon } from '../../assets/icons/apple-icon.svg';
+import ChevronLeftIcon from '../../assets/icons/chevronLeft.svg?react';
+import GoogleIcon from '../../assets/icons/google-icon.svg?react';
+import AppleIcon from '../../assets/icons/apple-icon.svg?react';
 import useValidate, { ValidationResult } from '../../hooks/useValidate';
 import { FieldsType } from './types';
 

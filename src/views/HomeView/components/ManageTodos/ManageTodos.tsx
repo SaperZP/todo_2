@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { manageTodosStyles } from './styles';
 import { StyledTextField } from '../../../../components/styledComponents';
 import { InputAdornment } from '@mui/material';
-import { ReactComponent as MagCustomIcon } from '../../../../assets/icons/mag.svg';
+import MagCustomIcon from '../../../../assets/icons/mag.svg?react';
 import TodosList from './components/TodosList';
 import { useDebouncedCallback } from 'use-debounce';
 import { useQuery } from '@apollo/client';

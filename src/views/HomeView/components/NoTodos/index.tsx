@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { SvgIcon } from '@mui/material';
-import { ReactComponent as NoTaskIcon } from '../../../../assets/icons/noTask.svg';
+import NoTaskIcon from '../../../../assets/icons/noTask.svg?react';
 import Typography from '@mui/material/Typography';
 import { noTodosStyles } from './styles';
 
