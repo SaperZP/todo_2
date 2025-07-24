@@ -4,7 +4,7 @@ import { ButtonBase } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import categoriesList from '../../../../../utils/categoriesList';
 import { todoItemStyles } from '../styles';
-import { ReactComponent as FlagCustomIcon } from '../../../../../assets/icons/flag.svg';
+import FlagCustomIcon from '../../../../../assets/icons/flag.svg?react';
 import CustomBadge from '../../../../../components/Badge/CustomBadge';
 import { useNavigate } from 'react-router-dom';
 import StatusRadioButton from '../../../../../components/StatusRadioButton/StatusRadioButton';

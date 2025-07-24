@@ -1,14 +1,14 @@
 import React from 'react';
-import { ReactComponent as BreadCustomIcon } from '../assets/icons/categoryIcons/bread.svg';
-import { ReactComponent as BriefcaseCustomIcon } from '../assets/icons/categoryIcons/briefcase.svg';
-import { ReactComponent as SportCustomIcon } from '../assets/icons/categoryIcons/sport.svg';
-import { ReactComponent as DesignCustomIcon } from '../assets/icons/categoryIcons/design.svg';
-import { ReactComponent as MortarboardCustomIcon } from '../assets/icons/categoryIcons/mortarboard.svg';
-import { ReactComponent as MegaphoneCustomIcon } from '../assets/icons/categoryIcons/megaphone.svg';
-import { ReactComponent as MusicCustomIcon } from '../assets/icons/categoryIcons/music.svg';
-import { ReactComponent as HeartbeatCustomIcon } from '../assets/icons/categoryIcons/heartbeat.svg';
-import { ReactComponent as MovieCustomIcon } from '../assets/icons/categoryIcons/movie.svg';
-import { ReactComponent as HomeCustomIcon } from '../assets/icons/categoryIcons/home.svg';
+import BreadCustomIcon from '../assets/icons/categoryIcons/bread.svg?react';
+import BriefcaseCustomIcon from '../assets/icons/categoryIcons/briefcase.svg?react';
+import SportCustomIcon from '../assets/icons/categoryIcons/sport.svg?react';
+import DesignCustomIcon from '../assets/icons/categoryIcons/design.svg?react';
+import MortarboardCustomIcon from '../assets/icons/categoryIcons/mortarboard.svg?react';
+import MegaphoneCustomIcon from '../assets/icons/categoryIcons/megaphone.svg?react';
+import MusicCustomIcon from '../assets/icons/categoryIcons/music.svg?react';
+import HeartbeatCustomIcon from '../assets/icons/categoryIcons/heartbeat.svg?react';
+import MovieCustomIcon from '../assets/icons/categoryIcons/movie.svg?react';
+import HomeCustomIcon from '../assets/icons/categoryIcons/home.svg?react';
 
 type categoryType = {
   id: string;

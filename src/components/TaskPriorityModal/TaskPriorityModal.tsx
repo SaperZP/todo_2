@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import CustomDialog from '../CustomDialog/CustomDialog';
 import Box from '@mui/material/Box';
-import { ReactComponent as CustomFlagIcon } from '../../assets/icons/flag.svg';
+import CustomFlagIcon from '../../assets/icons/flag.svg?react';
 import CustomButton from '../CustomButton';
 import ModalPickersLayout from '../ModalPickersLayout/ModalPickersLayout';
 import { taskPriorityModalStyles } from './styles';
